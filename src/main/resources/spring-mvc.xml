@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!--启动包扫描功能，spring自动扫描base-package包下面的所有java类文件,则把这些类注册为Spring的bean  -->
+    <context:component-scan base-package="com.maxh.sloa.controller"/>
+
+    <!-- 自动注册处理映射器RequestMappingHandlerMapping
+    和处理器适配器RequestMappingHandlerAdapter，
+    这是springMvc为@controller分发请求必须注册的驱动 -->
+    <mvc:annotation-driven/>
+
+    <!--使用默认的servlet来响应静态文件 -->
+    <!--<mvc:default-servlet-handler/>-->
+    <!-- 对静态资源文件的访问 -->
+    <mvc:resources mapping="/static/**" location="/static/" />
+    <!--装配文件上传功能所需要的multipartResolver -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 最大文件上传字节大小,10MB -->
+        <property name="maxUploadSize">
+            <value>10485760</value>
+        </property>
+        <!-- 请求的编码格式，默认为ISO-8859-1，必须和jsp页面的pageEncoding一致，以便正确读取表单 -->
+        <property name="defaultEncoding">
+            <value>UTF-8</value>
+        </property>
+    </bean>
+    <!--视图解析器,解析跳转到/WEB-INF/views/下，spring4.0版本后可以直接忽略，不用配置此项 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--前缀  -->
+        <property name="prefix" value="/WEB-INF/views/"/>
+        <!-- 后缀 -->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!--两个星号-->
+            <mvc:mapping path="/**"/>
+            <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求，此为自定义拦截器的路径 -->
+            <bean class="com.maxh.sloa.interceptor.LoginInterceptor">
+                <property name="excludedUrls">
+                    <list>
+                        <value>/toLogin</value>
+                        <value>/doLogin</value>
+                        <value>/static</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    
+    
+    <!-- @Value -->
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath*:encrypt.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="properties" ref="configProperties" />
+    </bean>
+</beans>
