@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface RoleDao {
     
-    List<Role> findAllByEnable(boolean b);
+    List<Role> findByStatus(boolean enable);
 }

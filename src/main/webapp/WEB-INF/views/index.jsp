@@ -7,58 +7,7 @@
     <%@ include file="/inc.jsp" %>
     <title>神龙OA</title>
     <script src="static/js/require.js"></script>
-    <script src="static/js/apublic_change_infopp.js"></script>
-    <script>
-        var MEMBER = {
-            id:${user.id},
-            realName: '${user.userName}',
-            userName: '${user.account}'
-        };
-        
-        function addTab(subtitle, url) {
-            if (!$('#tabs').tabs('exists', subtitle)) {
-                $('#tabs').tabs('add', {
-                    title: subtitle,
-                    content: createFrame(url),
-                    closable: false,
-                    width: $('#mainPanle').width() - 10,
-                    height: $('#mainPanle').height() - 26,
-                    iconCls: 'icon-search'
-                });
-            }
-            else {
-                $('#tabs').tabs('select', subtitle);
-            }
-            tabClose();
-        }
-
-        function createFrame(url) {
-            var s = '<iframe name="mainFrame" scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:100%;"></iframe>';
-            return s;
-        }
-
-        function tabClose() {
-            /*双击关闭TAB选项卡*/
-            $(".tabs-inner").dblclick(function () {
-                var subtitle = $(this).children("span").text();
-                $('#tabs').tabs('close', subtitle);
-            })
-
-            //绑定右键菜单
-            $(".tabs-inner").bind('contextmenu', function (e) {
-                $('#mm').menu('show', {
-                    left: e.pageX,
-                    top: e.pageY,
-                });
-
-                var subtitle = $(this).children("span").text();
-                $('#mm').data("currtab", subtitle);
-
-                return false;
-            });
-        }
-
-    </script>
+    <script src="static/js/app.js"></script>
 </head>
 <body class="easyui-layout">
 <div data-options="region:'north'" style="height: 70px;overflow: hidden;padding: 0 10px;">
@@ -70,7 +19,7 @@
     <h1>神龙科技智能办公系统</h1>
 </div>
 <div title="菜单" data-options="region:'west',iconCls:'fa fa-list'" style="width: 200px">
-    <div id="crm-menu" class="easyui-accordion" data-options="fit:true">
+    <div class="easyui-accordion" data-options="fit:true">
         <div title="系统管理">
             <ul class="easyui-tree" data-options="lines: true">
                 <li>角色管理</li>

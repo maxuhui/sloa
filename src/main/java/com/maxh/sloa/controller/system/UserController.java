@@ -3,7 +3,9 @@ package com.maxh.sloa.controller.system;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.maxh.sloa.entity.Role;
 import com.maxh.sloa.entity.User;
+import com.maxh.sloa.mapper.RoleDao;
 import com.maxh.sloa.mapper.UserDao;
 import com.maxh.sloa.util.EasyUIDataGridResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class UserController {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    RoleDao roleDao;
 
     @RequestMapping("/index")
     public String index(HttpSession session) {
@@ -60,10 +65,27 @@ public class UserController {
         if (id != null) {
             //编辑
             User user = userDao.findOne(id);
-            model.addAttribute("user", user);
+            model.addAttribute("userBean", user);
+
         }
         //查询角色
-//        model.addAttribute("roles", roleDao.findAllByEnable(true));
+        model.addAttribute("roles", roleDao.findByStatus(true));
         return "system/user/form";
     }
+
+    @RequestMapping("/check")
+    @ResponseBody
+    public String check(String account) {
+        if (userDao.countByUserName(account) == 0) {
+            return "true";
+        }
+        return "false";
+    }
+
+    @RequestMapping("/roles")
+    @ResponseBody
+    public List<Role> roles() {
+        return roleDao.findByStatus(true);
+    }
+
 }

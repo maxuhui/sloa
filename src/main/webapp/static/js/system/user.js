@@ -77,10 +77,10 @@ $(function () {
         var dialog = $("<div/>", {class: 'noflow'}).dialog({
             title: (id ? "编辑" : "创建") + "用户",
             iconCls: 'fa ' + (id ? "fa-edit" : "fa-plus-square"),
-            height: id ?  380 :420 ,
+            height: 380 ,
             width: 420,
-            // href: 'system/user/' + (id ? 'load?id=' + id : 'form'),
-            content:"<iframe scrolling='auto' frameborder='0' src='"+furl+"' style='width:100%; height:100%; display:block;'></iframe>",
+            href: 'system/user/' + (id ? 'load?id=' + id : 'form'),
+            // content:"<iframe scrolling='auto' frameborder='0' src='"+furl+"' style='width:100%; height:100%; display:block;'></iframe>",
             modal: true,
             onClose: function () {
                 $(this).dialog("destroy");
@@ -88,13 +88,12 @@ $(function () {
             onLoad: function () {
                 //窗口表单加载成功时执行
                 form = $("#member-form");
-
                 //这个字段比较特殊，有比较多的校验，所以单独拿出来实例化
-                $("#user_userName").textbox({
-                    label: '账号：',
-                    required: true,
-                    validType: ['userName', 'length[6, 10]', "remote['system/user/check','userName']"]
-                })
+                // $("#user_userName").textbox({
+                //     label: '账号：',
+                //     required: true,
+                //     validType: ['account', 'length[4, 10]', "remote['system/user/check','account']"]
+                // })
             },
             buttons: [{
                 iconCls: 'fa fa-save',
