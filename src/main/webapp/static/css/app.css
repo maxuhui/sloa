@@ -106,6 +106,107 @@ a:HOVER {
   border-top: none;
 }
 
+.viewui-navheader {
+    background: #84a23c;
+    height: 60px;
+    overflow: hidden;
+    padding: 0px 10px
+}
+
+.viewui-navheader .sys-logo a.logoicon {
+    background: url(../images/icon-logo.png) no-repeat;
+}
+
+.viewui-navheader .sys-logo a.logo_title {
+    background: url(../images/icon-logo.png) no-repeat;
+}
+
+.viewui-navheader .sys-logo a.e {
+    background: url(../images/icon-logosubtitle.png) no-repeat;
+}
+
+
+.viewui-navheader .sys-logo {
+    float: left;
+    padding-top: 5px;
+    height: 50px;
+    overflow: hidden
+}
+
+.viewui-navheader .sys-logo a.logoicon, .viewui-navheader .sys-logo a.logo_title, a.e, .viewui-navheader .sys-logo a.logo {
+    float: left;
+    height: 60px;
+    text-indent: -100%;
+    overflow: hidden
+}
+
+.viewui-navheader .sys-logo a.logoicon {
+    width: 87px;
+    display: none
+}
+
+.viewui-navheader .sys-logo a.logo_title {
+    margin-right: 15px
+}
+
+.viewui-navheader .sys-logo a.e {
+    width: 300px
+}
+
+.viewui-navmenu {
+    float: left;
+    margin-left: 100px;
+    margin-top: 0px;
+    height: 60px;
+    width: 590px;
+    list-style-type: none;
+}
+
+.viewui-navmenu .navmenu-item {
+    float: left;
+    height: 60px;
+    line-height: 60px
+}
+
+.viewui-navmenu .navmenu-item a.item {
+    display: block;
+    width: 80px;
+    padding: 6px 13px;
+    text-align: center;
+    line-height: 18px;
+    cursor: pointer
+}
+
+.viewui-navmenu .navmenu-item a.item .fa {
+    font-size: 32px;
+    height: 32px;
+    width: 32px
+}
+
+.viewui-navmenu .navmenu-item a.item .title {
+    display: block;
+    clear: both
+}
+
+
+.viewui-navmenu .navmenu-item {
+    color: #fff;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.viewui-navmenu .navmenu-item:first-child {
+    border-left: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.viewui-navmenu .navmenu-item a.item {
+    color: #ffffff;
+}
+
+.viewui-navmenu .navmenu-item a.active, .viewui-navmenu .navmenu-item a:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: #ffaa05;
+}
+
 .user-info {
   float: right;
   line-height: 70px;
@@ -118,6 +219,7 @@ a:HOVER {
 
 .user-info .item {
   cursor: pointer;
+  color: #444;
 }
 
 .user-info .item:hover {
