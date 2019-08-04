@@ -1,5 +1,7 @@
 package com.maxh.sloa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 public class Permission {
@@ -15,11 +17,6 @@ public class Permission {
     private Integer weight = 0;
     private Long parent_id;
     private List<Permission> children;
-
-    public String getText() {
-        return this.name;
-    }
-
     /**
      * 权限类型枚举
      */

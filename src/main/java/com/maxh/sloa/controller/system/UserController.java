@@ -8,6 +8,7 @@ import com.maxh.sloa.entity.User;
 import com.maxh.sloa.mapper.RoleDao;
 import com.maxh.sloa.mapper.UserDao;
 import com.maxh.sloa.util.EasyUIDataGridResult;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,11 +66,11 @@ public class UserController {
         if (id != null) {
             //编辑
             User user = userDao.findOne(id);
-            model.addAttribute("userBean", user);
-
+            JSONObject entityJson = JSONObject.fromObject(user);
+            model.addAttribute("userBean", entityJson);
         }
         //查询角色
-        model.addAttribute("roles", roleDao.findByStatus(true));
+//        model.addAttribute("roles", roleDao.findByStatus(true));
         return "system/user/form";
     }
 

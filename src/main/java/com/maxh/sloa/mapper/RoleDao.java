@@ -8,6 +8,10 @@ import java.util.List;
 
 @Repository
 public interface RoleDao {
-    
+
     List<Role> findByStatus(boolean enable);
+
+    Role findByUid(Long id);
+
+
 }

@@ -22,7 +22,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (null != excludedUrls && excludedUrls.size() >= 1) {
             for (String url : excludedUrls) {
                 if (requestUri.contains(url)) {
-                    System.out.println(url);
                     return true;
                 }
             }

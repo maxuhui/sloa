@@ -2,6 +2,7 @@ package com.maxh.sloa.controller;
 
 
 import com.maxh.sloa.common.Menu;
+import com.maxh.sloa.entity.Menus;
 import com.maxh.sloa.entity.Permission;
 import com.maxh.sloa.entity.Role;
 import com.maxh.sloa.entity.User;
@@ -21,6 +22,7 @@ import java.util.*;
 
 import org.apache.log4j.Logger;
 
+import static org.apache.commons.lang.StringUtils.isNotEmpty;
 import static org.springframework.util.ObjectUtils.isEmpty;
 
 
@@ -78,7 +80,10 @@ public class AppController {
                     permissions = new HashSet<>();
                     roles.forEach(role -> permissions.addAll(role.getPermissions()));
                 }
-
+                //存储权限key
+                Set<String> keys = new HashSet<>();
+                //所有有权限访问的请求
+                Set<String> urls = new HashSet<>();
                 //存储菜单
                 TreeSet<Permission> menus = new TreeSet<>((o1, o2) -> {
                     if (Objects.equals(o1.getWeight(), o2.getWeight())) {
@@ -87,48 +92,49 @@ public class AppController {
                     return o1.getWeight() - o2.getWeight();
                 });
 
-                //存储权限key
-                Set<String> keys = new HashSet<>();
-                //所有有权限访问的请求
-                Set<String> urls = new HashSet<>();
-
                 permissions.forEach(permission -> {
-                    if (permission.getEnable()) {
-                        if (permission.getType().equals(Permission.Type.MENU)) {
-                            //是菜单
+                    if (permission.getEnable()) {//可用状态
+                        if (permission.getType().equals(Permission.Type.MENU)) {//是菜单
                             menus.add(permission);
                             urls.add(permission.getPath());
                         }
                         //获取用户拥有的权限
                         keys.add(permission.getPermissionKey());
-
                         urls.addAll(Arrays.asList(permission.getResource().split(",")));
                     }
                 });
 
-                //树形数据转换
-                List<Menu> menuList = new ArrayList<>();
+//                //树形数据转换
+//                List<Menu> menuList = new ArrayList<>();
+//                menus.forEach(permission -> {
+//                    Menu m = new Menu();
+//                    m.setId(permission.getId());
+//                    m.setText(permission.getName());
+//                    m.setHref(permission.getPath());
+////                    m.setParentId(permission.getParent() == null ? null : permission.getParent().getId());
+//                    m.setParentId(permission.getParent_id());
+//                    menuList.add(m);
+//                });
+
+                List<Menus> menuList = new ArrayList<>();
                 menus.forEach(permission -> {
-                    Menu m = new Menu();
-                    m.setId(permission.getId());
-                    m.setText(permission.getName());
-                    m.setHref(permission.getPath());
-//                    m.setParentId(permission.getParent() == null ? null : permission.getParent().getId());
-                    m.setParentId(permission.getParent_id());
+                    Menus m = new Menus();
+                    m.setMenuid(permission.getId()+"");
+                    m.setMenuname(permission.getName());
+                    m.setParentMenu(permission.getParent_id()+"");
+                    m.setUrl(permission.getPath());
                     menuList.add(m);
                 });
-
-
-                MenuTree menuTree = new MenuTree();
-//                System.out.println("=========="+menuTree.menuList(menuList));
-                session.setAttribute("user", user);
-                session.setAttribute("menus", menuList);
-                 for (String str : keys) {
-                    System.out.println("------------"+str);
-                }
                 
+                List<Menus> json = new TreeBuilder().buildTree(menuList);
+
+                session.setAttribute("user", user);
+                session.setAttribute("menus", json);
                 session.setAttribute("keys", keys);
                 session.setAttribute("urls", urls);
+                session.setAttribute("isSuper", superId == user.getId());
+                ;
+
             } else {
                 rda.addFlashAttribute("error", "账号和密码不匹配！");
                 return "redirect:/toLogin";
@@ -144,7 +150,7 @@ public class AppController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "redirect:/";
+        return "redirect:/toLogin";
     }
 
     @RequestMapping("/menus")

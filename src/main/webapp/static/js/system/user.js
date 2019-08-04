@@ -80,7 +80,6 @@ $(function () {
             height: 380 ,
             width: 420,
             href: 'system/user/' + (id ? 'load?id=' + id : 'form'),
-            // content:"<iframe scrolling='auto' frameborder='0' src='"+furl+"' style='width:100%; height:100%; display:block;'></iframe>",
             modal: true,
             onClose: function () {
                 $(this).dialog("destroy");

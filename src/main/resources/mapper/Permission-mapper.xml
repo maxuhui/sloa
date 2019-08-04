@@ -15,7 +15,11 @@
         <result column="parent_id" property="parent_id"/>
     </resultMap>
 
-    <select id="findAllByEnableOrderByWeightDesc" resultMap="BaseResultMap">
-        select * from rbac_permission
+    <select id="findAllByEnableOrderByWeightDesc" resultMap="BaseResultMap" parameterType="boolean">
+        select * from rbac_permission where enable = #{enable}
+    </select>
+    <select id="findByRoleId" resultMap="BaseResultMap" parameterType="long">
+       SELECT * FROM rbac_role_permission t0,rbac_permission t1
+        WHERE t0.permission_id = t1.id and t1.enable = true AND t0.role_id = #{id}
     </select>
 </mapper>

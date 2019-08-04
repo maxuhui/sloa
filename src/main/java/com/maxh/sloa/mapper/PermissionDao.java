@@ -16,4 +16,6 @@ public interface PermissionDao {
      * @return
      */
     Set<Permission> findAllByEnableOrderByWeightDesc(boolean enable);
+    
+    Permission findByRoleId(Long id);
 }

@@ -7,9 +7,15 @@
         <result column="enable" property="enable"/>
         <result column="role_key" property="roleKey"/>
         <result column="role_name" property="roleName"/>
+        <collection property="permissions" column="id" ofType="Permission" select="com.maxh.sloa.mapper.PermissionDao.findByRoleId"/>
     </resultMap>
     
     <select id="findByStatus" resultMap="BaseResultMap"  parameterType="boolean">
         select * from rbac_role where enable = #{enable}
     </select>
+    <select id="findByUid" resultMap="BaseResultMap"  parameterType="long">
+       SELECT * FROM rbac_role t0, rbac_user_role  t1
+        WHERE t0.id=t1.role_id AND t1.user_id = #{id}
+    </select>
+    
 </mapper>
