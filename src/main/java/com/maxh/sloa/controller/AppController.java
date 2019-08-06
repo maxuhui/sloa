@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -22,7 +23,6 @@ import java.util.*;
 
 import org.apache.log4j.Logger;
 
-import static org.apache.commons.lang.StringUtils.isNotEmpty;
 import static org.springframework.util.ObjectUtils.isEmpty;
 
 
@@ -152,7 +152,24 @@ public class AppController {
         session.invalidate();
         return "redirect:/toLogin";
     }
-
+    /**
+     * 权限resource的js资源
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("/resource")
+    public String login(HttpSession session, Model model) {
+//        ObjectMapper mapper = new ObjectMapper();
+        Object resourceKey = session.getAttribute("keys");
+//        try {
+//            model.addAttribute("resourceKey", mapper.writeValueAsString(resourceKey));
+            model.addAttribute("resourceKey", resourceKey);
+//        } catch (JsonProcessingException e) {
+//            logger.error("json转换错误", e);
+//        }
+        return "resource";
+    }
     @RequestMapping("/menus")
     @ResponseBody
     public List<Menu> menus(@SessionAttribute("menus") List<Menu> menuList) {

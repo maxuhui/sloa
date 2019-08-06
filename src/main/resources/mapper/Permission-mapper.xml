@@ -22,4 +22,22 @@
        SELECT * FROM rbac_role_permission t0,rbac_permission t1
         WHERE t0.permission_id = t1.id and t1.enable = true AND t0.role_id = #{id}
     </select>
+
+    <insert id="save" parameterType="Permission">
+        insert into rbac_permission (name,permission_key,type,path,resource,enable,description,weight,parent_id)
+        values(#{name},#{permissionKey},#{type},#{path},#{resource},#{enable},#{description},#{weight},#{parent_id}) 
+    </insert>
+    <delete id="delete" parameterType="long">
+        deleet from rbac_permission where id = #{id}
+    </delete>
+    <select id="findOne" resultMap="BaseResultMap" parameterType="Permission">
+        select * from rbac_permission where enable = true and id= #{id}
+    </select>
+    <select id="findAllByParentIsNull" resultMap="BaseResultMap">
+      select * from rbac_permission where enable = true 
+    </select>
+    <select id="findAllByParent" resultMap="BaseResultMap">
+      select * from rbac_permission where enable = true 
+    </select>
+
 </mapper>

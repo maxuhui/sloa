@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.maxh.sloa.mapper.RoleDao">
-    <resultMap type="Role" id="BaseResultMap">
+    <resultMap type="Role" id="ResultRolePerMap">
         <result column="id" property="id"/>
         <result column="description" property="description"/>
         <result column="enable" property="enable"/>
@@ -9,13 +9,23 @@
         <result column="role_name" property="roleName"/>
         <collection property="permissions" column="id" ofType="Permission" select="com.maxh.sloa.mapper.PermissionDao.findByRoleId"/>
     </resultMap>
-    
+    <resultMap type="Role" id="BaseResultMap">
+        <result column="id" property="id"/>
+        <result column="description" property="description"/>
+        <result column="enable" property="enable"/>
+        <result column="role_key" property="roleKey"/>
+        <result column="role_name" property="roleName"/>
+    </resultMap>
+
     <select id="findByStatus" resultMap="BaseResultMap"  parameterType="boolean">
         select * from rbac_role where enable = #{enable}
     </select>
-    <select id="findByUid" resultMap="BaseResultMap"  parameterType="long">
+    <select id="findByUid" resultMap="ResultRolePerMap"  parameterType="long">
        SELECT * FROM rbac_role t0, rbac_user_role  t1
         WHERE t0.id=t1.role_id AND t1.user_id = #{id}
+    </select>
+    <select id="findOne" resultType="Role" parameterType="long">
+        select  * from  rbac_role where id =#{id}
     </select>
     
 </mapper>

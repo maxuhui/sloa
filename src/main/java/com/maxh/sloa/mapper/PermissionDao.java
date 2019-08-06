@@ -3,19 +3,47 @@ package com.maxh.sloa.mapper;
 import com.maxh.sloa.entity.Permission;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Set;
 
 @Repository
 public interface PermissionDao {
+    
+    Set<Permission> findAllByEnableOrderByWeightDesc(boolean enable);
+
+    /**
+     * 查询角色下的资源
+     * @param id
+     * @return
+     */
+    Permission findByRoleId(Long id);
+
 
 
     /**
-     * 根据父节点找子节点
+     * 获取根节点
      *
-     * @param enable
      * @return
      */
-    Set<Permission> findAllByEnableOrderByWeightDesc(boolean enable);
+    List<Permission> findAllByParentIsNull();
     
-    Permission findByRoleId(Long id);
+
+    /**
+     * 根据id查询
+     * @param id
+     * @return
+     */
+    Permission findOne(Long id);
+    
+    /**
+     * 保存资源
+     * @param permission
+     */
+    void save(Permission permission);
+
+    /**
+     * 删除
+     * @param permission
+     */
+    void delete(Permission permission);
 }

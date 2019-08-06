@@ -2,12 +2,13 @@
  * 系统公共，js。理论上只存放公共业务代码。
  */
 $(function () {
-
     //全局ajax设置
     $.ajaxSetup({
         statusCode: {
             401: function () {
-                $.messager.alert("权限提醒", "您没有权限访问此资源！");
+                $.messager.alert("登录提醒", "您没有权限访问此资源，或刷新页面！", 'info', function () {
+                    location.replace("/toLogin");
+                });
             },
             402: function () {
                 $.messager.alert("登录提醒", "登录超时，请重新登录！", 'info', function () {
@@ -17,13 +18,7 @@ $(function () {
         }
     });
     var center = $("body").layout("panel", "center");
-    // center.panel('options').onLoad = function () {
-    //     require([center.panel('options').href], function (model) {
-    //         model && model(center);
-    //     });
-    // };
     $('.easyui-accordion li a').click(function () {
-        var tabTitle = $(this).text();
         /**
          *处理tab切换问题：将"href"修改成"way"。
          */

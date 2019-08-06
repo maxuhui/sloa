@@ -1,9 +1,11 @@
 package com.maxh.sloa.mapper;
 
+import com.maxh.sloa.entity.Role;
 import com.maxh.sloa.entity.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface UserDao {
@@ -20,4 +22,9 @@ public interface UserDao {
     User findOne(Long id);
 
     int countByUserName(String account);
+
+    void delete(User user);
+
+    void save(User user);
+
 }

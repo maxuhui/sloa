@@ -7,9 +7,38 @@
     <title>神龙OA</title>
     <script src="${pageContext.request.contextPath}/static/js/require.js"></script>
     <script src="${pageContext.request.contextPath}/static/js/app.js"></script>
+    <!--权限资源-->
+    <%--<script src="${pageContext.request.contextPath}/resource" charset="utf-8"></script>--%>
+    <script type='text/javascript'>
+        (function (w) {
+            <%--var resourceKey = ${keys};--%>
+            /**
+             * 工具栏的权限过滤
+             * @param tools
+             * @returns
+             */
+            function authToolBar(tools) {
+                var resourceKey = $("#resourceKey").val();
+                var toolbars = [];
+                $.each(tools, function (key, btn) {
+                    if (resourceKey.indexOf(key) != -1) {
+                        toolbars.push(btn);
+                    }
+                });
+                if (arguments.length > 1) {
+                    for (var i = 1; i < arguments.length; i++) {
+                        toolbars.push(arguments[i])
+                    }
+                }
+                return toolbars;
+            }
 
+            w.authToolBar = authToolBar;
+        })(window);
+    </script>
 </head>
 <body class="easyui-layout">
+<input type="hidden" id="resourceKey" value="${keys}">
 <%--<div data-options="region:'north'" style="height: 70px;overflow: hidden;padding: 0 10px;" class="viewui-navheader">--%>
 <div data-options="region:'north',split:false,border:false,border:false" class="viewui-navheader">
     <%--<h1>神龙科技智能办公系统</h1>--%>
@@ -37,7 +66,7 @@
         <c:if test="${not empty menus}">
             <c:forEach items="${menus}" var="menu">
                 <div title="${menu.menuname}" data-options="iconCls:'fa fa-cogs'">
-                    <%--<ul class="crm-menu">--%>
+                        <%--<ul class="crm-menu">--%>
                     <ul class="easyui-tree" data-options="lines: true">
                         <c:forEach items="${menu.menus}" var="child">
                             <%--<li data-url="${child.url}">${child.menuname}</li>--%>
@@ -47,7 +76,7 @@
                 </div>
             </c:forEach>
         </c:if>
-        
+
     </div>
 </div>
 <div data-options="region:'center',href:'desktop.jsp'">

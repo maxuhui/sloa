@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/static/images/favicon.ico" type="image/gif" />
 <!-- 导入主题样式文件 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/easyui/themes/gray/easyui.css">
 <!-- 图标 -->
