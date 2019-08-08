@@ -78,13 +78,19 @@ public class AppController {
                     //获取用户菜单
                     Set<Role> roles = user.getRoles();
                     permissions = new HashSet<>();
-                    roles.forEach(role -> permissions.addAll(role.getPermissions()));
+                    //roles.forEach(role -> permissions.addAll(role.getPermissions()));
+                     
+                    for (Role role : roles) {
+                        Set<Permission> p = permissionDao.findByRoleId(role.getId());
+                        permissions.addAll(p);
+                    }
                 }
                 //存储权限key
                 Set<String> keys = new HashSet<>();
                 //所有有权限访问的请求
                 Set<String> urls = new HashSet<>();
                 //存储菜单
+                //TODO  权重是什么作用？？
                 TreeSet<Permission> menus = new TreeSet<>((o1, o2) -> {
                     if (Objects.equals(o1.getWeight(), o2.getWeight())) {
                         return -1;
@@ -119,13 +125,13 @@ public class AppController {
                 List<Menus> menuList = new ArrayList<>();
                 menus.forEach(permission -> {
                     Menus m = new Menus();
-                    m.setMenuid(permission.getId()+"");
+                    m.setMenuid(permission.getId() + "");
                     m.setMenuname(permission.getName());
-                    m.setParentMenu(permission.getParent_id()+"");
+                    m.setParentMenu(permission.getParent_id() + "");
                     m.setUrl(permission.getPath());
                     menuList.add(m);
                 });
-                
+
                 List<Menus> json = new TreeBuilder().buildTree(menuList);
 
                 session.setAttribute("user", user);
@@ -152,6 +158,7 @@ public class AppController {
         session.invalidate();
         return "redirect:/toLogin";
     }
+
     /**
      * 权限resource的js资源
      *
@@ -164,12 +171,13 @@ public class AppController {
         Object resourceKey = session.getAttribute("keys");
 //        try {
 //            model.addAttribute("resourceKey", mapper.writeValueAsString(resourceKey));
-            model.addAttribute("resourceKey", resourceKey);
+        model.addAttribute("resourceKey", resourceKey);
 //        } catch (JsonProcessingException e) {
 //            logger.error("json转换错误", e);
 //        }
         return "resource";
     }
+
     @RequestMapping("/menus")
     @ResponseBody
     public List<Menu> menus(@SessionAttribute("menus") List<Menu> menuList) {

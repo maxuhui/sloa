@@ -27,3 +27,5 @@
 <!--webSocket的支持-->
 <%--<script src="${pageContext.request.contextPath}/static/js/lib/sockjs.min.js" charset="utf-8"></script>--%>
 <%--<script src="${pageContext.request.contextPath}/static/js/lib/vue.js" charset="utf-8"></script>--%>
+<%--EasyUI combotree扩展支持自定义idField和textField--%>
+<script src="${pageContext.request.contextPath}/static/js/lib/combotreeExtend.js" charset="utf-8"></script>

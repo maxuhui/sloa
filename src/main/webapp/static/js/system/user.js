@@ -31,10 +31,15 @@ $(function () {
             {
                 field: 'edit', title: '操作', width: 100, align: 'center', formatter: function (val, row) {
                     // return userGridAction.children("a.actions").attr('data-id', row.id).end().html();
+                    // return authToolBar({
+                    //     "system:user:edit": '<a data-id="' + row.id + '" class="ctr ctr-edit">编辑</a>',
+                    //     "system:user:delete": '<a data-id="' + row.id + '" class="ctr ctr-delete">删除</a>'
+                    // }).join("");
                     return authToolBar({
-                        "system:user:edit": '<a data-id="' + row.id + '" class="ctr ctr-edit">编辑</a>',
-                        "system:user:delete": '<a data-id="' + row.id + '" class="ctr ctr-delete">删除</a>'
-                    }).join("");
+                        "system:user:edit": '<a data-id="' + row.id + '" class="actions fa fa-pencil-square-o edit">编辑</a>',
+                        "system:user:delete": '<a data-id="' + row.id + '" class="actions fa fa-trash-o delete">删除</a>'
+                    }).join(" ");
+                    
                 }
             }
         ]],

@@ -9,6 +9,7 @@ $(function () {
         fit: true,
         border: false,
         url: 'system/permission/list',
+        lines: true,
         idField: 'id',
         treeField: 'name',
         columns: [[
@@ -25,12 +26,7 @@ $(function () {
                     return "<span title='" + value + "'>" + value + "</span>";
                 }
             },
-            {field: 'weight', title: '权重', align: 'center', width: 40},
-            {
-                field: 'description', title: '描述', width: 200, formatter: function (value) {
-                    return "<span title='" + value + "'>" + value + "</span>";
-                }
-            },
+            // {field: 'weight', title: '权重', align: 'center', width: 40},
             {
                 field: 'enable', title: '状态', width: 60, align: 'center', formatter: function (val) {
                     return val ? "可用" : "禁用";
@@ -45,7 +41,7 @@ $(function () {
                     return authToolBar({
                         "system:permission:edit": '<a data-id="' + row.id + '" class="actions fa fa-pencil-square-o edit">编辑</a>',
                         "system:permission:delete": '<a data-id="' + row.id + '" class="actions fa fa-trash-o delete">删除</a>'
-                    }).join("");
+                    }).join(" ");
                 }
             }
         ]],

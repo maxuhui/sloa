@@ -11,6 +11,7 @@ import com.maxh.sloa.mapper.UserDao;
 import com.maxh.sloa.util.EasyUIDataGridResult;
 import net.sf.json.JSONObject;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,7 +81,8 @@ public class UserController {
     }
 
     @RequestMapping({"/save", "/update"})
-    public JsonResult form(User user, Long[] roles) {
+    @ResponseBody
+    public JsonResult form( User user, Long[] roles) {
         if (user.getId() == null) {
             //md5加密密码
             user.setPassword("000000");

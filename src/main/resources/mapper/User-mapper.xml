@@ -10,7 +10,7 @@
         <result column="tel" property="tel"/>
         <result column="user_name" property="userName"/>
         <collection property="roles" ofType="Role">
-            <result column="id" property="id"/>
+            <result column="role_id" property="id"/>
             <result column="role_name" property="roleName"/>
             <result column="role_key" property="roleKey"/>
         </collection>
@@ -22,9 +22,13 @@
         <result column="password" property="password"/>
         <result column="tel" property="tel"/>
         <result column="user_name" property="userName"/>
+        <collection property="roles" column="id" ofType="Role" select="com.maxh.sloa.mapper.RoleDao.findByUid"/>
     </resultMap>
     <select id="findFirstByAccount" resultMap="user_role_List" parameterType="string">
-        select * from rbac_user where account = #{account}
+         SELECT u.id,u.account,u.ENABLE,u.PASSWORD,u.tel,u.user_name,ur.role_id,r.role_key,r.role_name
+        FROM rbac_user u
+        LEFT JOIN rbac_user_role ur ON u.id = ur.user_id
+        LEFT JOIN rbac_role r ON r.id = ur.role_id where  u.account = #{account}
     </select>
     <select id="findAll" resultMap="user_role_List" parameterType="User">
         SELECT u.id,u.account,u.ENABLE,u.PASSWORD,u.tel,u.user_name,ur.role_id,r.role_key,r.role_name
@@ -44,7 +48,7 @@
             </if>
         </where>
     </select>
-    <select id="findOne" resultMap="user_role_List" parameterType="long">
+    <select id="findOne" resultMap="BaseResultMap" parameterType="long">
           select * from rbac_user where id = #{id}
     </select>
 

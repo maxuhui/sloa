@@ -16,7 +16,7 @@ public interface PermissionDao {
      * @param id
      * @return
      */
-    Permission findByRoleId(Long id);
+    Set<Permission> findByRoleId(Long id);
 
 
 
@@ -46,4 +46,8 @@ public interface PermissionDao {
      * @param permission
      */
     void delete(Permission permission);
+
+    List<Permission> findAllByParent();
+
+    void update(Permission permission);
 }

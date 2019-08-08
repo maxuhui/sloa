@@ -7,7 +7,19 @@
         <result column="enable" property="enable"/>
         <result column="role_key" property="roleKey"/>
         <result column="role_name" property="roleName"/>
-        <collection property="permissions" column="id" ofType="Permission" select="com.maxh.sloa.mapper.PermissionDao.findByRoleId"/>
+        <!--<collection property="permissions" column="id" ofType="Permission" select="com.maxh.sloa.mapper.PermissionDao.findByRoleId"/>-->
+        <collection property="permissions" ofType="Permission">
+            <result column="oid" property="id"/>
+            <result column="name" property="name"/>
+            <result column="permission_key" property="permissionKey"/>
+            <result column="type" property="type"/>
+            <result column="path" property="path"/>
+            <result column="resource" property="resource"/>
+            <result column="enable" property="enable"/>
+            <result column="description" property="description"/>
+            <result column="weight" property="weight"/>
+            <result column="parent_id" property="parent_id"/>
+        </collection>
     </resultMap>
     <resultMap type="Role" id="BaseResultMap">
         <result column="id" property="id"/>
@@ -17,15 +29,47 @@
         <result column="role_name" property="roleName"/>
     </resultMap>
 
-    <select id="findByStatus" resultMap="BaseResultMap"  parameterType="boolean">
+    <select id="findByStatus" resultMap="BaseResultMap" parameterType="boolean">
         select * from rbac_role where enable = #{enable}
     </select>
-    <select id="findByUid" resultMap="ResultRolePerMap"  parameterType="long">
+  
+    <select id="findOne" resultMap="BaseResultMap" parameterType="long">
+        select * from rbac_role where id = #{id}
+    </select>
+
+    <insert id="permissionSave" parameterType="hashmap">
+        insert into rbac_role_permission(role_id, permission_id) values
+        <foreach collection="permissionId" index="index" item="item" separator=",">
+            ( #{roleId}, #{item} )
+        </foreach>
+    </insert>
+    <delete id="deletePermissionByRole" parameterType="long">
+        delete from rbac_role_permission where  role_id = #{rid}
+    </delete>
+    <select id="findByUid" resultMap="BaseResultMap" parameterType="long">
        SELECT * FROM rbac_role t0, rbac_user_role  t1
         WHERE t0.id=t1.role_id AND t1.user_id = #{id}
     </select>
-    <select id="findOne" resultType="Role" parameterType="long">
-        select  * from  rbac_role where id =#{id}
+
+    <select id="findAll" resultMap="ResultRolePerMap">
+        SELECT
+        r.id,
+        r.description,
+        r.ENABLE,
+        r.role_key,
+        r.role_name,
+        p.id as oid,
+        p.`name`
+        FROM
+        rbac_role r
+        LEFT JOIN rbac_role_permission rp ON rp.role_id = r.id
+        LEFT JOIN rbac_permission p ON p.id = rp.permission_id
+        <where>
+            <if test="id != null">
+                and r.id = #{id}
+            </if>
+        </where>
     </select>
-    
+
+
 </mapper>

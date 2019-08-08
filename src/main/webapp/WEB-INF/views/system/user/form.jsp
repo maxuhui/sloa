@@ -13,9 +13,7 @@
     </div>
     <div class="field">
         <input id="role_box" class="easyui-combobox" style="width:100%" name="roles"
-               data-options="label:'用户角色：',valueField:'id',panelMaxHeight:200,panelHeight:'auto',textField:'roleName',url:'system/user/roles',editable:false,multiple:true"
-        >
-        </select>
+               data-options="label:'用户角色：',valueField:'id',panelMaxHeight:200,panelHeight:'auto',textField:'roleName',url:'system/user/roles',editable:false,multiple:true">
     </div>
     <div class="field">
         <label class="textbox-label textbox-label-before">状态：</label>

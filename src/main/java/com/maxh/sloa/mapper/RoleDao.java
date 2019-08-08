@@ -4,6 +4,7 @@ import com.maxh.sloa.entity.Role;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 
@@ -16,5 +17,13 @@ public interface RoleDao {
     
     Role findOne(Long id);
     
-    void save(Set<Role> roles);
+    void save(Role role);
+
+    List<Role>  findAll();
+
+//    void permissionSave(Long roleId, Long[] permissionId);
+
+    void deletePermissionByRole(Long roleId);
+
+    void permissionSave(Map<String, Object> map);
 }

@@ -16,10 +16,12 @@
     </resultMap>
 
     <select id="findAllByEnableOrderByWeightDesc" resultMap="BaseResultMap" parameterType="boolean">
-        select * from rbac_permission where enable = #{enable}
+        select  id,name,permission_key,type,path,resource,enable,description,weight,parent_id
+        from rbac_permission where enable = #{enable}
     </select>
     <select id="findByRoleId" resultMap="BaseResultMap" parameterType="long">
-       SELECT * FROM rbac_role_permission t0,rbac_permission t1
+       SELECT 	t1.id,name,t1.permission_key,t1.type,t1.path,t1.resource,t1.enable,t1.description,t1.weight,t1.parent_id
+       FROM rbac_role_permission t0,rbac_permission t1
         WHERE t0.permission_id = t1.id and t1.enable = true AND t0.role_id = #{id}
     </select>
 
@@ -31,13 +33,31 @@
         deleet from rbac_permission where id = #{id}
     </delete>
     <select id="findOne" resultMap="BaseResultMap" parameterType="Permission">
-        select * from rbac_permission where enable = true and id= #{id}
+        select id,name,permission_key,type,path,resource,enable,description,weight,parent_id
+         from rbac_permission where enable = true and id= #{id}
     </select>
     <select id="findAllByParentIsNull" resultMap="BaseResultMap">
-      select * from rbac_permission where enable = true 
+      select id,name,permission_key,type,path,resource,enable,description,weight,parent_id
+      from rbac_permission where enable = true 
     </select>
     <select id="findAllByParent" resultMap="BaseResultMap">
-      select * from rbac_permission where enable = true 
+      select id,name,permission_key,type,path,resource,enable,description,weight,parent_id
+       from rbac_permission where enable = true   AND type  = 'MENU'
     </select>
 
+    <update id="update" parameterType="Permission">
+        update rbac_permission
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="permission_key != null">permission_key=#{permissionKey},</if>
+            <if test="type != null">type=#{type},</if>
+            <if test="path != null">path=#{path}</if>
+            <if test="resource != null">resource=#{resource}</if>
+            <if test="enable != null">enable=#{enable}</if>
+            <if test="description != null">description=#{description}</if>
+            <if test="weight != null">weight=#{weight}</if>
+            <if test="parent_id != null">parent_id=#{parent_id}</if>
+        </set>
+        where id=#{id}
+    </update>
 </mapper>

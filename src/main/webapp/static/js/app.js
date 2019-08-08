@@ -7,13 +7,16 @@ $(function () {
         statusCode: {
             401: function () {
                 $.messager.alert("登录提醒", "您没有权限访问此资源，或刷新页面！", 'info', function () {
-                    location.replace("/toLogin");
+                    // location.replace("../toLogin");
+                    location.reload();
                 });
             },
             402: function () {
                 $.messager.alert("登录提醒", "登录超时，请重新登录！", 'info', function () {
-                    location.replace("/toLogin");
+                    // location.replace("../toLogin");
+                    location.reload();
                 });
+                
             }
         }
     });
