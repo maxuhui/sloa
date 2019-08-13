@@ -8,15 +8,15 @@ import java.util.Set;
 
 @Repository
 public interface PermissionDao {
-    
-    Set<Permission> findAllByEnableOrderByWeightDesc(boolean enable);
+
+    List<Permission> findAllByEnableOrderByWeightDesc(boolean enable);
 
     /**
      * 查询角色下的资源
      * @param id
      * @return
      */
-    Set<Permission> findByRoleId(Long id);
+    List<Permission> findByRoleId(Long id);
 
 
 

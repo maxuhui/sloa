@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/static/images/favicon.ico" type="image/gif" />
 <!-- 导入主题样式文件 -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/static/easyui/themes/gray/easyui.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/static/easyui/themes/default/easyui.css">
 <!-- 图标 -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/easyui/themes/icon.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/font-awesome/css/font-awesome.min.css">

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maxh.sloa.mapper.VehicleDao">
+
+    <resultMap type="Vehicle" id="BaseResultMap">
+        <result column="id" property="id"/>
+        <result column="companyName" property="companyName"/>
+        <result column="carOwner" property="carOwner"/>
+        <result column="contacts" property="contacts"/>
+        <result column="contactsTel" property="contactsTel"/>
+        <result column="carNumber" property="carNumber"/>
+        <result column="plateColor" property="plateColor"/>
+        <result column="issuingUnit" property="issuingUnit"/>
+        <result column="retDate" property="retDate"/>
+        <result column="carType" property="carType"/>
+        <result column="carBrand" property="carBrand"/>
+        <result column="carModel" property="carModel"/>
+        <result column="carColor" property="carColor"/>
+        <result column="carVin" property="carVin"/>
+        <result column="made" property="made"/>
+    </resultMap>
+    
+    <select id="findAll" resultMap="BaseResultMap" parameterType="Vehicle">
+        SELECT  * FROM oa_vehicle
+    </select>
+     
+</mapper>

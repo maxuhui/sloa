@@ -23,6 +23,7 @@
         <typeAlias type="com.maxh.sloa.entity.User" alias="User" />
         <typeAlias type="com.maxh.sloa.entity.Permission" alias="Permission" />
         <typeAlias type="com.maxh.sloa.entity.Role" alias="Role" />
+        <typeAlias type="com.maxh.sloa.entity.vehicle.Vehicle" alias="Vehicle" />
     </typeAliases>
     <plugins>
         <!-- com.github.pagehelper为PageHelper类所在包名 -->

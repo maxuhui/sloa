@@ -30,23 +30,17 @@ import static org.springframework.util.ObjectUtils.isEmpty;
 @Transactional(readOnly = true)
 public class AppController {
     Logger logger = Logger.getLogger(AppController.class);
-
-
     @Autowired
     private UserDao userDao;
-
     @Value("${system.super.user.id}")
     private Long superId;
-
     @Autowired
     private PermissionDao permissionDao;
 
-
     @RequestMapping("/index")
-    public String index(HttpSession session) {
+    public String index() {
         return "index";
     }
-
 
     @RequestMapping("/toLogin")
     public String login(@SessionAttribute(value = "user", required = false) User user) {
@@ -57,31 +51,28 @@ public class AppController {
     }
 
     @PostMapping("/doLogin")
-    public String doLogin(@RequestParam String account, @RequestParam String password, HttpSession session, RedirectAttributes rda) {
+    public String doLogin(@RequestParam String account,@RequestParam String password, HttpSession session, RedirectAttributes rda) {
         // 参数校验
         if (isEmpty(account) || isEmpty(password)) {
             rda.addFlashAttribute("error", "参数错误！");
             return "redirect:/toLogin";
         }
-
         User user = userDao.findFirstByAccount(account);
         //判断账号是否可用
         if (user != null && user.getEnable()) {
             //判断密码是否匹配
             if (user.getPassword().equals(DigestUtils.md5Hex(password))) {
-
-                Set<Permission> permissions;
+                List<Permission> permissions;
                 //判断是否是超级管理员
                 if (Objects.equals(superId, user.getId())) {
                     permissions = permissionDao.findAllByEnableOrderByWeightDesc(true);
                 } else {
                     //获取用户菜单
-                    Set<Role> roles = user.getRoles();
-                    permissions = new HashSet<>();
+                    List<Role> roles = user.getRoles();
+                    permissions = new ArrayList<>();
                     //roles.forEach(role -> permissions.addAll(role.getPermissions()));
-                     
                     for (Role role : roles) {
-                        Set<Permission> p = permissionDao.findByRoleId(role.getId());
+                        List<Permission> p = permissionDao.findByRoleId(role.getId());
                         permissions.addAll(p);
                     }
                 }
@@ -132,14 +123,13 @@ public class AppController {
                     menuList.add(m);
                 });
 
-                List<Menus> json = new TreeBuilder().buildTree(menuList);
 
+                List<Menus> json = new TreeBuilder().buildTree(menuList);
                 session.setAttribute("user", user);
                 session.setAttribute("menus", json);
                 session.setAttribute("keys", keys);
                 session.setAttribute("urls", urls);
                 session.setAttribute("isSuper", superId == user.getId());
-                ;
 
             } else {
                 rda.addFlashAttribute("error", "账号和密码不匹配！");

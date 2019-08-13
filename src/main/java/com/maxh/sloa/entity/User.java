@@ -1,23 +1,18 @@
 package com.maxh.sloa.entity;
 
+import java.util.List;
 import java.util.Set;
 
 
 public class User {
 
     private Long id;
-
     private String account;
-
     private String password;
-
     private String userName;
-
     private String tel;
-
     private Boolean enable = false;
-
-    private Set<Role> roles;
+    private List<Role> roles;
 
     public Long getId() {
         return id;
@@ -67,11 +62,11 @@ public class User {
         this.enable = enable;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 

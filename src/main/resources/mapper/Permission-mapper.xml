@@ -47,17 +47,17 @@
 
     <update id="update" parameterType="Permission">
         update rbac_permission
-        <set>
+        <trim prefix="set" suffixOverrides=",">
             <if test="name != null">name=#{name},</if>
-            <if test="permission_key != null">permission_key=#{permissionKey},</if>
+            <if test="permissionKey != null">permission_key=#{permissionKey},</if>
             <if test="type != null">type=#{type},</if>
-            <if test="path != null">path=#{path}</if>
-            <if test="resource != null">resource=#{resource}</if>
-            <if test="enable != null">enable=#{enable}</if>
-            <if test="description != null">description=#{description}</if>
-            <if test="weight != null">weight=#{weight}</if>
-            <if test="parent_id != null">parent_id=#{parent_id}</if>
-        </set>
+            <if test="path != null">path=#{path},</if>
+            <if test="resource != null">resource=#{resource},</if>
+            <if test="enable != null">enable=#{enable},</if>
+            <if test="description != null">description=#{description},</if>
+            <if test="weight != null">weight=#{weight},</if>
+            <if test="parent_id != null">parent_id=#{parent_id},</if>
+        </trim>
         where id=#{id}
     </update>
 </mapper>

@@ -34,7 +34,7 @@ public class UserController {
     RoleDao roleDao;
 
     @RequestMapping("/index")
-    public String index(HttpSession session) {
+    public String index() {
         return "system/user";
     }
 
@@ -60,8 +60,6 @@ public class UserController {
             JSONObject entityJson = JSONObject.fromObject(user);
             model.addAttribute("userBean", entityJson);
         }
-        //查询角色
-//        model.addAttribute("roles", roleDao.findByStatus(true));
         return "system/user/form";
     }
 
@@ -82,7 +80,7 @@ public class UserController {
 
     @RequestMapping({"/save", "/update"})
     @ResponseBody
-    public JsonResult form( User user, Long[] roles) {
+    public JsonResult form(User user, Long[] roles) {
         if (user.getId() == null) {
             //md5加密密码
             user.setPassword("000000");
@@ -96,20 +94,7 @@ public class UserController {
                 user.setPassword(org.getPassword());
             }
         }
-
-        //处理角色的关联
-//        if (roles != null && roles.length > 1) {
-//            Set<Role> rolesList = new HashSet<Role>();
-//            for (Long rid : roles) {
-//                if (rid != null) {
-//                    rolesList.add(roleDao.findOne(rid));
-//                }
-//            }
-//            user.setRoles(rolesList);
-//        }
-
         userDao.save(user);
-
         return JsonResult.success();
 
     }

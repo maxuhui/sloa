@@ -41,12 +41,13 @@ public class RoleController {
         }
         return "system/permission/form";
     }
+
     @RequestMapping("/list")
     @ResponseBody
     public List<Role> list() {
         return roleDao.findAll();
     }
-    
+
     @RequestMapping("permission/tree")
     @ResponseBody
     public List<Permission> permissionTree() {
@@ -56,14 +57,14 @@ public class RoleController {
 
     @RequestMapping("permission/save")
     @ResponseBody
-    public JsonResult permissionSave( @Param("roleId") Long roleId, @Param("permissionId") Long[] permissionId) {
+    public JsonResult permissionSave(@Param("roleId") Long roleId, @Param("permissionId") Long[] permissionId) {
         roleDao.deletePermissionByRole(roleId);
-        Map<String,Object> map = new HashMap<>();
-        map.put("roleId",roleId);
-        map.put("permissionId",permissionId);
+        Map<String, Object> map = new HashMap<>();
+        map.put("roleId", roleId);
+        map.put("permissionId", permissionId);
 //        roleDao.permissionSave(roleId,permissionId);
         roleDao.permissionSave(map);
         return JsonResult.success("授权成功！");
     }
-    
+
 }

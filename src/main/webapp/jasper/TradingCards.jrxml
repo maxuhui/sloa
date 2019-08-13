@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="1cb76c7a-f85b-48a8-97b8-758c952fc286">
+	<property name="ireport.zoom" value="1.8150000000000004"/>
+	<property name="ireport.x" value="25"/>
+	<property name="ireport.y" value="0"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="phone" class="java.lang.String"/>
+	<detail>
+		<band height="595" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="317" y="69" width="100" height="15" uuid="05d0081a-d3b1-4ad4-b960-05bdb4fbf77e"/>
+				<textElement verticalAlignment="Top">
+					<font size="9" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="317" y="84" width="100" height="15" uuid="258e2707-e241-4a94-9881-d5ffc09826b1"/>
+				<textElement>
+					<font size="9" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{phone}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="485" y="114" width="100" height="15" uuid="37df6367-efab-4ac4-964d-863fb676416a"/>
+				<textElement verticalAlignment="Middle">
+					<font  size="9" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[底盘号：]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>

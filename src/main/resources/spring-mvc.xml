@@ -29,6 +29,11 @@
             <value>UTF-8</value>
         </property>
     </bean>
+    <!-- 注册XmlViewResolver，用于iReport & JasperReports报表生成 -->
+    <!--<bean id="jasperReportResolver" class="org.springframework.web.servlet.view.XmlViewResolver">-->
+        <!--<property name="order" value="0" />-->
+        <!--<property name="location" value="classpath:jasper-views.xml" />-->
+    <!--</bean>-->
     <!--视图解析器,解析跳转到/WEB-INF/views/下，spring4.0版本后可以直接忽略，不用配置此项 -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <!--前缀  -->

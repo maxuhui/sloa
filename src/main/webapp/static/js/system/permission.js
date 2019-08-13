@@ -13,7 +13,7 @@ $(function () {
         idField: 'id',
         treeField: 'name',
         columns: [[
-            {field: 'name', title: '名称', width: 150},
+            {field: 'name', title: '名称', width: 180},
             {field: 'permissionKey', title: '标识', width: 150},
             {
                 field: 'type', title: '类型', align: 'center', width: 60, formatter: function (val) {
@@ -51,7 +51,12 @@ $(function () {
             handler: function () {
                 createForm();
             }
-        }]
+        }],
+        onLoadSuccess: function (row, data) {
+            $.each(data, function (i, val) {
+                permissionGrid.treegrid('collapseAll', data[i].id)
+            })
+        }
     });
     //给操作按钮绑定事件
     permissionGrid.datagrid("getPanel").on('click', "a.edit", function () {// 编辑按钮事件
@@ -80,9 +85,7 @@ $(function () {
             height: 480,
             width: 420,
             href: 'system/permission/form',
-            queryParams: {
-                id: id
-            },
+            queryParams: {id: id},
             modal: true,
             onClose: function () {
                 $(this).dialog("destroy");
@@ -96,7 +99,6 @@ $(function () {
                 iconCls: 'fa fa-save',
                 text: '保存',
                 handler: function () {
-
                     if (form.form('validate')) {
                         $.post("system/permission/save", form.serialize(), function (res) {
                             permissionGrid.treegrid('reload');
