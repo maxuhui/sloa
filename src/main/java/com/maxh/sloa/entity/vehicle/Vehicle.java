@@ -1,12 +1,10 @@
 package com.maxh.sloa.entity.vehicle;
 
-import com.maxh.sloa.entity.store.Equipment;
-import com.maxh.sloa.entity.store.Prove;
-import com.maxh.sloa.entity.store.ProveRecord;
-
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
-public class Vehicle  implements Serializable {
+
+public class Vehicle implements Serializable {
 
     private String id;
     private Long fileId;//自编号
@@ -50,10 +48,21 @@ public class Vehicle  implements Serializable {
     private String useCharacter;// 使用性质
     private String access;// 车辆获取方式
     private String produce;// 出厂日期
-    private Equipment equipment;//设备信息
-    private Prove prove;//证明信息
-    private List<ProveRecord> proveRecords;//证明列表
-    private int uprice;// 收费单价 例如1000/年
+//    -----------------------------
+    private String equitment; // 设备号
+    private String simNumber; // sim 卡号
+    private String installTime;//设备安装时间
+    private String networkNo; // 入网证明编号
+    private String arrears;//是否欠费
+    private String svrStartTime;//服务开始时间
+    private String svrEndTime;//服务到期时间
+//    ------------------------------------
+    private String addtime;
+    private String remark;
+    private String serviceFee;
+    
+    private InputStream inTwoDim;
+    private List<ServiceFees> serviceFees;//缴费记录
 
     public String getId() {
         return id;
@@ -391,35 +400,116 @@ public class Vehicle  implements Serializable {
         this.produce = produce;
     }
 
-    public Equipment getEquipment() {
-        return equipment;
+    public String getEquitment() {
+        return equitment;
     }
 
-    public void setEquipment(Equipment equipment) {
-        this.equipment = equipment;
+    public void setEquitment(String equitment) {
+        this.equitment = equitment;
     }
 
-    public Prove getProve() {
-        return prove;
+    public String getSimNumber() {
+        return simNumber;
     }
 
-    public void setProve(Prove prove) {
-        this.prove = prove;
+    public void setSimNumber(String simNumber) {
+        this.simNumber = simNumber;
     }
 
-    public List<ProveRecord> getProveRecords() {
-        return proveRecords;
+    public String getInstallTime() {
+        return installTime;
     }
 
-    public void setProveRecords(List<ProveRecord> proveRecords) {
-        this.proveRecords = proveRecords;
+    public void setInstallTime(String installTime) {
+        this.installTime = installTime;
     }
 
-    public int getUprice() {
-        return uprice;
+    public String getNetworkNo() {
+        return networkNo;
     }
 
-    public void setUprice(int uprice) {
-        this.uprice = uprice;
+    public void setNetworkNo(String networkNo) {
+        this.networkNo = networkNo;
+    }
+
+    public String getArrears() {
+        return arrears;
+    }
+
+    public void setArrears(String arrears) {
+        this.arrears = arrears;
+    }
+
+    public String getSvrStartTime() {
+        return svrStartTime;
+    }
+
+    public void setSvrStartTime(String svrStartTime) {
+        this.svrStartTime = svrStartTime;
+    }
+
+    public String getSvrEndTime() {
+        return svrEndTime;
+    }
+
+    public void setSvrEndTime(String svrEndTime) {
+        this.svrEndTime = svrEndTime;
+    }
+
+    public String getAddtime() {
+        return addtime;
+    }
+
+    public void setAddtime(String addtime) {
+        this.addtime = addtime;
+    }
+
+    public InputStream getInTwoDim() {
+        return inTwoDim;
+    }
+
+    public void setInTwoDim(InputStream inTwoDim) {
+        this.inTwoDim = inTwoDim;
+    }
+
+    public List<ServiceFees> getServiceFees() {
+        return serviceFees;
+    }
+
+    public void setServiceFees(List<ServiceFees> serviceFees) {
+        this.serviceFees = serviceFees;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getServiceFee() {
+        return serviceFee;
+    }
+
+    public void setServiceFee(String serviceFee) {
+        this.serviceFee = serviceFee;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehicle{" +
+                "id='" + id + '\'' +
+                ", fileId=" + fileId +
+                ", companyName='" + companyName + '\'' +
+                ", contacts='" + contacts + '\'' +
+                ", contactsTel='" + contactsTel + '\'' +
+                ", carNumber='" + carNumber + '\'' +
+                ", plateColor='" + plateColor + '\'' +
+                ", equitment='" + equitment + '\'' +
+                ", simNumber='" + simNumber + '\'' +
+                ", installTime='" + installTime + '\'' +
+                ", networkNo='" + networkNo + '\'' +
+                '}';
     }
 }

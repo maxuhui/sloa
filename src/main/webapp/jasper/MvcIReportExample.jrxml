@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MvcIReportExample" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d7bcd63b-a4c7-4ef1-8716-02f9e7a3500a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="d5e366b7-26bf-4e70-a30e-02871079cdd8"/>
+	<field name="name" class="java.lang.String"/>
+    <field name="sex" class="java.lang.String"/>
+    <field name="age" class="java.lang.Integer"/>
+    <field name="hometown" class="java.lang.String"/>
+    <field name="phone" class="java.lang.String"/>
+
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="182" y="40" width="255" height="20" uuid="0f200657-7cb1-4e2d-9ff5-80a5385d31a9"/>
+				<text><![CDATA[TEST IREPORT SPRINGMNVC]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="37" y="11" width="100" height="20" uuid="278b703a-aba6-4d8b-8797-5958520f8416"/>
+				<text><![CDATA[NAME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="11" width="100" height="20" uuid="1d18bacc-3a9e-4e7a-9de0-f0518963b214"/>
+				<text><![CDATA[SEX]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="237" y="11" width="100" height="20" uuid="e5e2c9fb-4d0e-4266-b2a3-b6091b4a9a16"/>
+				<text><![CDATA[AGE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="337" y="11" width="100" height="20" uuid="5beb3a92-9854-4d73-bab7-499d21964baf"/>
+				<text><![CDATA[HOMETWON]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="437" y="11" width="100" height="20" uuid="9ba644fb-ac4c-4846-a9ba-4c3093978046"/>
+				<text><![CDATA[PHONE]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<textField>
+				<reportElement x="37" y="0" width="100" height="20" uuid="266d76de-c4d2-41c0-ace1-c9fe6ece9ab6"/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="0" width="100" height="20" uuid="a3b3a391-3153-4eda-8732-4c1a54339f1c"/>
+				<textFieldExpression><![CDATA[$F{sex}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="237" y="0" width="100" height="20" uuid="b51f30f4-2ce3-4771-9309-ba4e01190713"/>
+				<textFieldExpression><![CDATA[$F{age}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="337" y="0" width="100" height="20" uuid="3b15ecbe-8776-4577-8c6e-fd92b995d173"/>
+				<textFieldExpression><![CDATA[$F{hometown}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="437" y="0" width="100" height="20" uuid="9833220e-dc80-4918-9cf2-bfc8f70abf81"/>
+				<textFieldExpression><![CDATA[$F{phone}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+</jasperReport>

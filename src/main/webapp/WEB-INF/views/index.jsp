@@ -32,7 +32,6 @@
                 }
                 return toolbars;
             }
-
             w.authToolBar = authToolBar;
         })(window);
     </script>
@@ -70,7 +69,7 @@
                     <ul class="easyui-tree" data-options="lines: true">
                         <c:forEach items="${menu.menus}" var="child">
                             <%--<li data-url="${child.url}">${child.menuname}</li>--%>
-                            <li><a way="${child.url}">${child.menuname}</a></li>
+                            <li><a way="${child.url}" tabTitle="${child.menuname}">${child.menuname}</a></li>
                         </c:forEach>
                     </ul>
                 </div>
@@ -79,11 +78,14 @@
 
     </div>
 </div>
-<div data-options="region:'center',href:'desktop.jsp'">
-
+<div data-options="region:'center'">
+    <div id="tabs" class="easyui-tabs" fit="true" border="false">
+        <%--<div title="快速查询" style="padding: 20px; overflow: hidden;" id="home">--%>
+            <%--<iframe scrolling="auto" frameborder="0"  src="desktop" style="width:100%;height:100%;"></iframe>--%>
+        <%--</div>--%>
+    </div>
 </div>
-<div id="footer" data-options="region:'south'"
-     style="height:20px;text-align: center;line-height: 20px;overflow: hidden;">
+<div id="footer" data-options="region:'south'" style="height:20px;text-align: center;line-height: 20px;overflow: hidden;">
     Copyright © 2019 神龙办公 v1.2 Powered by 河北神龙物流信息科技有限公司
 </div>
 </body>

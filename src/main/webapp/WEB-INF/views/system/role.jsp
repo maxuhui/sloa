@@ -1,7 +1,7 @@
  
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="easyui-layout" data-options="fit:true">
-    <div data-options="region:'center'">
+    <div data-options="region:'center',title:'角色管理'">
         <table id="roleGrid"></table>
     </div>
     <div id="rolePermissionPanel" data-options="region:'east',collapsible:false,tools:'#rolePermissionTools'" style="width: 200px;" title="请选择角色">

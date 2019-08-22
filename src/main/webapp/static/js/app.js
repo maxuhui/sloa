@@ -2,6 +2,7 @@
  * 系统公共，js。理论上只存放公共业务代码。
  */
 $(function () {
+    addTab('快速查询', 'desktop', '');
     //全局ajax设置
     $.ajaxSetup({
         statusCode: {
@@ -16,7 +17,7 @@ $(function () {
                     // location.replace("../toLogin");
                     location.reload();
                 });
-                
+
             }
         }
     });
@@ -26,8 +27,10 @@ $(function () {
          *处理tab切换问题：将"href"修改成"way"。
          */
         var url = $(this).attr("way");
+        var tabTitle = $(this).attr("tabTitle");
         // 刷新center区域
-        center.panel("refresh", url);
+        // center.panel("refresh", url);
+        addTab(tabTitle, url, "");
         $('.easyui-accordion li div').removeClass("selected");
         $(this).parent().addClass("selected");
     }).hover(function () {
@@ -35,17 +38,6 @@ $(function () {
     }, function () {
         $(this).parent().removeClass("hover");
     });
-    // 绑定菜单事件
-    $(".crm-menu").on('click', 'li', function () {
-        if (!$(this).hasClass('selected')) {
-            // 获取center对应的panel对象
-            // 刷新center区域
-            center.panel("refresh", this.dataset.url);
-            // 选中状态
-            $(this).siblings('.selected').toggleClass().end().addClass('selected');
-        }
-    });
-
     //查看和修改用户信息
     $("#public_change_info").on('click', function () {
         var form;
@@ -146,6 +138,35 @@ $(function () {
             }]
         });
     });
+
+    function addTab(subtitle, url, icon) {
+        if (!$('#tabs').tabs('exists', subtitle)) {
+            $('#tabs').tabs('add', {
+                title: subtitle,
+                href:url,
+                // content: createFrame(url),
+                closable: true,
+                icon: icon
+            });
+        } else {
+            // $('#tabs').tabs('select', subtitle);
+            var currentTab = $('#tabs').tabs('getSelected');
+            var url = $(currentTab.panel('options')).attr('href');
+            $('#tabs').tabs('update', {
+                tab: currentTab,
+                options: {
+                    href: url
+                }
+            });
+            currentTab.panel('refresh');
+        }
+     }
+
+    function createFrame(url) {
+        var s = '<iframe scrolling="auto" frameborder="0"  src="' + url + '" style="width:100%;height:100%;"></iframe>';
+        return s;
+    }
+
     /**
      * 扩展一个jq组件，获取一个json格式的表单值
      * @param ignoreNull 是否排除空值

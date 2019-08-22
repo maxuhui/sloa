@@ -6,22 +6,25 @@ import com.maxh.sloa.entity.Menus;
 import com.maxh.sloa.entity.Permission;
 import com.maxh.sloa.entity.Role;
 import com.maxh.sloa.entity.User;
+import com.maxh.sloa.entity.vehicle.Vehicle;
 import com.maxh.sloa.mapper.PermissionDao;
 import com.maxh.sloa.mapper.UserDao;
-import com.maxh.sloa.util.MenuTree;
+import com.maxh.sloa.mapper.VehicleDao;
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
-
-import org.apache.log4j.Logger;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
 
@@ -32,6 +35,9 @@ public class AppController {
     Logger logger = Logger.getLogger(AppController.class);
     @Autowired
     private UserDao userDao;
+    @Autowired
+    VehicleDao vehicleDao;
+
     @Value("${system.super.user.id}")
     private Long superId;
     @Autowired
@@ -40,6 +46,20 @@ public class AppController {
     @RequestMapping("/index")
     public String index() {
         return "index";
+    }
+
+    @RequestMapping("/desktop")
+    public ModelAndView desktop(String carNumber) {
+        ModelAndView mv = new ModelAndView();
+        if(!isEmpty(carNumber)){
+            Vehicle vehicle = new Vehicle();
+            vehicle.setCarNumber(carNumber.trim());
+            Vehicle ve = vehicleDao.queryOne(vehicle);
+            mv.addObject("vehicleData", ve);
+        }
+       mv.setViewName("desktop");
+//        return "desktop";
+        return mv;
     }
 
     @RequestMapping("/toLogin")
@@ -51,7 +71,7 @@ public class AppController {
     }
 
     @PostMapping("/doLogin")
-    public String doLogin(@RequestParam String account,@RequestParam String password, HttpSession session, RedirectAttributes rda) {
+    public String doLogin(String account, String password, HttpSession session, RedirectAttributes rda) {
         // 参数校验
         if (isEmpty(account) || isEmpty(password)) {
             rda.addFlashAttribute("error", "参数错误！");
@@ -171,6 +191,37 @@ public class AppController {
     @RequestMapping("/menus")
     @ResponseBody
     public List<Menu> menus(@SessionAttribute("menus") List<Menu> menuList) {
+
         return menuList;
+    }
+
+    /**
+     * 返回iReport报表视图
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/report", method = RequestMethod.GET)
+    public String report(Model model) {
+
+        Vehicle vehicle = new Vehicle();
+        vehicle.setFileId(Long.valueOf(123123123));
+        vehicle.setAddtime("20190909");
+        vehicle.setCarNumber("冀DM111J");
+        vehicle.setPlateColor("蓝色");
+        vehicle.setCarBrand("奔驰");
+        vehicle.setCompanyName("神龙");
+//       
+        List<Vehicle> vehicleList = new ArrayList<>();
+        vehicleList.add(vehicle);
+        // 报表数据源  
+        JRDataSource jrDataSource = new JRBeanCollectionDataSource(vehicleList);
+
+        // 动态指定报表模板url  
+        model.addAttribute("url", "/jasper/prove.jrxml");
+        model.addAttribute("format", "pdf"); // 报表格式  
+        model.addAttribute("jrMainDataSource", jrDataSource);
+
+        return "iReportView"; // 对应jasper-defs.xml中的bean id  
     }
 }

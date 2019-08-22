@@ -12,8 +12,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class LoginInterceptor implements HandlerInterceptor {
     Logger LOGGER = Logger.getLogger(LoginInterceptor.class);
@@ -28,6 +30,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         //如果是方法请求，则进行统计
+
         if (handler instanceof HandlerMethod) {
             //获取方法执行前时间
             Long now = System.currentTimeMillis();
@@ -36,42 +39,18 @@ public class LoginInterceptor implements HandlerInterceptor {
             //格式化当前时间，以便输出
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String methodTime = sdf.format(new Date(now));
+            
+            StringBuilder sb = new StringBuilder(1000);
 
-            //获取Controller
-            String controller = ((HandlerMethod) handler).getBean().getClass().getName();
-            //获取方法
-            Method mehtod = ((HandlerMethod) handler).getMethod();
-            //获取URI
-            String uri = request.getRequestURI();
-            //获取请求类型 POST 、PUT 、GET等等
-            String type = request.getMethod();
-
-            //获取请求参数
-            //将request的body信息放到缓存读取器中
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(request.getInputStream(), "UTF-8"));
-            //创建缓存字符串存储request的body信息
-            StringBuffer stringBuffer = new StringBuffer();
-            //将bufferedReader的数据读取到stringBuffer中
-            String line;
-            while (null != (line = bufferedReader.readLine())) {
-                stringBuffer.append(line);
-            }
-            String parameters = stringBuffer.toString();
-
-            //组合信息
-            StringBuffer sb = new StringBuffer();
-            sb.append("\n------------------------------------------------------------------------------");
-            sb.append(methodTime);
-            sb.append("--------------------------------------------------------------------------------");
-            sb.append("\n----------Controller   :").append(controller);
-            sb.append("\n----------Method       :[").append(mehtod);
-            sb.append("\n----------Parameters   :").append(parameters);
-            sb.append("\n----------URI          :[").append(uri);
-            sb.append("\n------------------------------------------------------------------------------");
-            sb.append("-------------------");
-            sb.append("--------------------------------------------------------------------------------");
+            sb.append("-----------------------").append(methodTime).append("-------------------------------------\n");
+            HandlerMethod h = (HandlerMethod) handler;
+            sb.append("Controller: ").append(h.getBean().getClass().getName()).append("\n");
+            sb.append("Method    : ").append(h.getMethod().getName()).append("\n");
+            sb.append("Params    : ").append(getParamString(request.getParameterMap())).append("\n");
+            sb.append("URI       : ").append(request.getRequestURI()).append("\n");
             LOGGER.info(sb.toString());
         }
+        
         String requestUri = request.getRequestURI().replace(request.getContextPath(), "");
         if (null != excludedUrls && excludedUrls.size() >= 1) {
             for (String url : excludedUrls) {
@@ -122,5 +101,18 @@ public class LoginInterceptor implements HandlerInterceptor {
                     .append(",").append("Use Time : ").append(useTime).append(" 毫秒}\n");
             LOGGER.info(sb.toString());
         }
+    }
+    private String getParamString(Map<String, String[]> map) {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, String[]> e : map.entrySet()) {
+            sb.append(e.getKey()).append("=");
+            String[] value = e.getValue();
+            if (value != null && value.length == 1) {
+                sb.append(value[0]).append("\t");
+            } else {
+                sb.append(Arrays.toString(value)).append("\t");
+            }
+        }
+        return sb.toString();
     }
 }

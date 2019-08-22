@@ -332,3 +332,58 @@ a:HOVER {
   height: 100px;
   width: 100px;
 }
+.editor-table {
+    width: 100%;
+    border-right: solid 1px #ccc;
+    border-bottom: solid 1px #ccc;
+    border-collapse: collapse
+}
+
+.editor-table td {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-top: solid 1px #ccc;
+    border-left: solid 1px #ccc
+}
+
+.editor-label {
+    width: 96px;
+    text-align: right;
+    padding-right: 5px;
+    background-color: #f8fcff
+}
+
+.editor-field {
+    padding-left: 5px;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: -moz-pre-wrap
+}
+
+.editor-field select {
+    width: 184px
+}
+
+.editor-required {
+    color: red
+}
+.infoTable {
+    max-width: 100%;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.infoTable tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.infoTable th, .infoTable td {
+    padding: 8px;
+    line-height: 20px;
+    text-align: left;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}

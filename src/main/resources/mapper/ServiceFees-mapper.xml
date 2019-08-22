@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.maxh.sloa.mapper.ServiceFeesDao">
+
+    <resultMap type="ServiceFees" id="BaseResultMap">
+        <result column="id" property="id"/>
+        <result column="purpose" property="purpose"/>
+        <result column="carNumber" property="carNumber"/>
+        <result column="owner" property="owner"/>
+        <result column="number" property="number"/>
+        <result column="startTime" property="startTime"/>
+        <result column="endTime" property="endTime"/>
+        <result column="colAmounts" property="colAmounts"/>
+        <result column="riqi" property="riqi"/>
+        <result column="agent" property="agent"/>
+        <result column="depCode" property="depCode"/>
+        <result column="depName" property="depName"/>
+        <result column="fees" property="fees"/>
+        <result column="amounts" property="amounts"/>
+        <result column="sriqi" property="sriqi"/>
+        <result column="payee" property="payee"/>
+        <result column="remark" property="remark"/>
+        <result column="inspector" property="inspector"/>
+        <result column="sf_time" property="sf_time"/>
+        <result column="qr_time" property="qr_time"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="BaseResultMap" parameterType="ServiceFees">
+        SELECT  *   FROM oa_fees  
+    </select>
+
+</mapper>

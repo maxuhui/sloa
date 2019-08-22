@@ -13,4 +13,14 @@ public interface VehicleDao {
      * @return
      */
     List<Vehicle> findAll(Vehicle vehicle);
+
+    void save(Vehicle vehicle);
+
+    void edit(Vehicle vehicle);
+
+    void deleteById(String id);
+
+    Vehicle findOne(String id);
+
+    Vehicle queryOne(Vehicle vehicle);
 }

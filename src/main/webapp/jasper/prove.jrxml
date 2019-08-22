@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="prove" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="820b5270-a904-4d73-8186-32a75339017b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="carOwner" class="java.lang.String"/>
+	<field name="carNumber" class="java.lang.String"/>
+	<field name="plateColor" class="java.lang.String"/>
+	<field name="carBrand" class="java.lang.String"/>
+	<field name="inTwoDim" class="java.io.InputStream"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="800" splitType="Stretch">
+		
+			<textField>
+				<reportElement x="216" y="237" width="43" height="20" uuid="593437a3-9242-4a93-a5f1-d5124b18af26"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="STSong" size="9" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plateColor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="146" y="237" width="70" height="20" uuid="e86b0417-52a0-4b4b-a3cb-5bd80ddffe89"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="STSong" size="9" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{carNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="327" y="237" width="100" height="20" uuid="3ac65c4f-b63d-424d-a0a9-bd64c3bbd349"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="STSong" size="9" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{carBrand}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame">
+				<reportElement stretchType="RelativeToBandHeight" x="79" y="546" width="100" height="100" uuid="e38afa50-0eb4-4e4b-86a7-023ee8ad37e7"/>
+				<imageExpression><![CDATA[$F{inTwoDim}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+</jasperReport>

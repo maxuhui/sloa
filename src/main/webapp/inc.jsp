@@ -29,3 +29,6 @@
 <%--<script src="${pageContext.request.contextPath}/static/js/lib/vue.js" charset="utf-8"></script>--%>
 <%--EasyUI combotree扩展支持自定义idField和textField--%>
 <script src="${pageContext.request.contextPath}/static/js/lib/combotreeExtend.js" charset="utf-8"></script>
+<%--My97DatePicker--%>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/My97DatePicker/WdatePicker.js"></script>
+

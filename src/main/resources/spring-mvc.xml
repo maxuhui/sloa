@@ -8,44 +8,57 @@
     <!--启动包扫描功能，spring自动扫描base-package包下面的所有java类文件,则把这些类注册为Spring的bean  -->
     <context:component-scan base-package="com.maxh.sloa.controller"/>
 
-    <!-- 自动注册处理映射器RequestMappingHandlerMapping
-    和处理器适配器RequestMappingHandlerAdapter，
-    这是springMvc为@controller分发请求必须注册的驱动 -->
-    <mvc:annotation-driven/>
-
-    <!--使用默认的servlet来响应静态文件 -->
-    <!--<mvc:default-servlet-handler/>-->
-    <!-- 对静态资源文件的访问 -->
-    <mvc:resources mapping="/static/**" location="/static/" />
-    <!--装配文件上传功能所需要的multipartResolver -->
-    <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <!-- 最大文件上传字节大小,10MB -->
-        <property name="maxUploadSize">
-            <value>10485760</value>
-        </property>
-        <!-- 请求的编码格式，默认为ISO-8859-1，必须和jsp页面的pageEncoding一致，以便正确读取表单 -->
-        <property name="defaultEncoding">
-            <value>UTF-8</value>
-        </property>
-    </bean>
+    <mvc:annotation-driven>
+        <!-- 允许注册实现了HttpMessageConverter接口的bean，来对requestbody 或responsebody中的数据进行解析 -->
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.ResourceHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+            <!-- 去除返回字符串时的引号 -->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8"/>
+                <!-- 避免出现乱码 -->
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <!--启用默认Servlet -->
+    <mvc:default-servlet-handler/>
     <!-- 注册XmlViewResolver，用于iReport & JasperReports报表生成 -->
-    <!--<bean id="jasperReportResolver" class="org.springframework.web.servlet.view.XmlViewResolver">-->
-        <!--<property name="order" value="0" />-->
-        <!--<property name="location" value="classpath:jasper-views.xml" />-->
-    <!--</bean>-->
-    <!--视图解析器,解析跳转到/WEB-INF/views/下，spring4.0版本后可以直接忽略，不用配置此项 -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <!--前缀  -->
+    <bean id="jasperReportResolver" class="org.springframework.web.servlet.view.XmlViewResolver">
+        <property name="order" value="0"/>
+        <property name="location" value="classpath:jasper-defs.xml"/>
+    </bean>
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="order" value="1"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
         <property name="prefix" value="/WEB-INF/views/"/>
-        <!-- 后缀 -->
         <property name="suffix" value=".jsp"/>
     </bean>
+    <!--只扫描@Controller注解类,否则影响事务 -->
+    <context:component-scan base-package="com.maxh.sloa" use-default-filters="false">
+        <context:include-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <!-- 上传拦截，如最大上传值及最小上传值 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置上传文件的最大尺寸为10M -->
+        <property name="maxUploadSize" value="10240"/>
+        <property name="maxInMemorySize" value="4096"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="resolveLazily" value="true"/>
+    </bean>
+
+    <!-- 访问拦截 -->
     <mvc:interceptors>
         <mvc:interceptor>
-            <!--两个星号-->
             <mvc:mapping path="/**"/>
-            <!-- 使用bean定义一个Interceptor，直接定义在mvc:interceptors根下面的Interceptor将拦截所有的请求，此为自定义拦截器的路径 -->
             <bean class="com.maxh.sloa.interceptor.LoginInterceptor">
                 <property name="excludedUrls">
                     <list>
@@ -57,8 +70,7 @@
             </bean>
         </mvc:interceptor>
     </mvc:interceptors>
-    
-    
+
     <!-- @Value -->
     <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
@@ -68,6 +80,6 @@
         </property>
     </bean>
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
-        <property name="properties" ref="configProperties" />
+        <property name="properties" ref="configProperties"/>
     </bean>
 </beans>

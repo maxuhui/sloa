@@ -1,0 +1,739 @@
+body {
+    font-size: 12px;
+    color: #444;
+    background-color: #fff;
+    font-family: Arial, Microsoft YaHei, sans-serif !important;
+    margin: 0
+}
+
+iframe {
+    vertical-align: top
+}
+
+td {
+    font-size: 12px;
+    border-color: silver;
+    line-height: 19px
+}
+
+input, select, textarea {
+    font-size: 12px
+}
+
+input[type="color"], input[type="email"], input[type="number"], input[type="password"], input[type="tel"], input[type="url"], input[type="text"], textarea {
+    border: 1px solid #999
+}
+
+input[type="image"] {
+    vertical-align: middle
+}
+
+input::-ms-clear {
+    display: none
+}
+
+.loadingImg {
+    width: 15px;
+    height: 15px;
+    background: url(../images/loading.gif) no-repeat 0 0 0 0;
+    visibility: hidden
+}
+
+.ToolBar {
+    width: 100%;
+    font-weight: normal;
+    font-size: 12px;
+    background-color: #f8f8f8;
+    text-decoration: none;
+    padding: 5px 0
+}
+
+.ToolBar a, .ToolBar input {
+    text-decoration: none;
+    color: #000;
+    margin-left: 15px;
+    margin-top: 5px
+}
+
+.ToolBar a img {
+    vertical-align: middle;
+    margin-top: -4px;
+    margin-right: 3px;
+    border: 0
+}
+
+.ToolBar1 {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-top: 10px;
+    margin-right: 10px
+}
+
+.NoWrap {
+    table-layout: fixed;
+    word-break: break-all;
+    width: 270px
+}
+
+.invalidInput {
+    border-right: #999 1px solid;
+    border-top: #999 1px solid;
+    font-size: 12px;
+    border-left: #999 1px solid;
+    color: #000;
+    border-bottom: #999 1px solid;
+    background-color: #d6d3d6
+}
+
+.inputEnabled {
+    border-right: #999 1px inset;
+    border-top: #999 1px inset;
+    vertical-align: baseline;
+    border-left: #999 1px inset;
+    color: #000;
+    border-bottom: #999 1px inset;
+    background-color: #fff
+}
+
+.inputDisabled {
+    border-right: #999 1px inset;
+    border-top: #999 1px inset;
+    vertical-align: baseline;
+    border-left: #999 1px inset;
+    color: #000;
+    border-bottom: #999 1px inset;
+    background-color: #d3d3d3
+}
+
+.wrapAll {
+    word-wrap: break-word;
+    word-break: break-all
+}
+
+.SearchBar {
+    border-top: solid 1px #ddd;
+    text-align: left;
+    width: 100%;
+    background: #fafafa
+}
+
+.SearchBar-noline {
+    border-top: 0
+}
+
+.SearchBar input[type="text"] {
+    line-height: 20px;
+    height: 20px
+}
+
+.SearchBar span.control-container {
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 2px;
+    margin-bottom: 2px
+}
+
+.SearchBar input {
+    _line-height: 20px;
+    _height: 20px
+}
+
+.SearchBar select {
+    height: 24px
+}
+
+.SearchBar form {
+    margin: 0
+}
+
+.WordWrap {
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: -moz-pre-wrap
+}
+
+.Arainwebcombo {
+    margin: 0;
+    padding: 0
+}
+
+.Arainwebcombo .divDropDownFrame {
+    position: absolute;
+    display: none;
+    height: 155px;
+    overflow: hidden;
+    background-color: Transparent
+}
+
+.Arainwebcombo .inputDropDown {
+    border: #999 1px solid;
+    color: #000;
+    height: 18px;
+    line-height: 18px
+}
+
+.Arainwebcombo .imgDropDown {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    bottom: 3px;
+    cursor: pointer;
+    _margin-left: 1px;
+    right: 0
+}
+
+.Arainwebcombo .divDropDown {
+    position: absolute;
+    display: none;
+    height: 150px;
+    margin-left: 1px;
+    padding: 1px;
+    border: 1px solid #999;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #fff
+}
+
+.Arainwebcombo .divDropDown ul li {
+    padding: 0 5px;
+    cursor: pointer;
+    line-height: 15px
+}
+
+.Arainwebcombo .divDropDown ul {
+    list-style: none;
+    margin: 0;
+    padding: 0
+}
+
+.loading {
+    width: 100%;
+    margin: auto;
+    background: url(../Images/load.gif) center no-repeat;
+    position: absolute;
+    z-index: 10000
+}
+
+#orgSearchDiv {
+    width: 250px;
+    padding: 2px 2px
+}
+
+#orgSearchDiv #Drp_OrgSearchType {
+    display: block;
+    float: left;
+    *margin-top: 3px;
+    width: 75px;
+    height: 22px
+}
+
+#orgSearchDiv #Txt_OrgSearch {
+    width: 122px;
+    border: 1px solid #999;
+    line-height: 18px;
+    height: 18px
+}
+
+#orgSearchDiv .btn {
+    margin: 0;
+    padding: 1px 6px;
+    *padding: 0 6px;
+    *overflow: visible
+}
+
+#div_DropTree {
+    position: relative;
+    white-space: nowrap
+}
+
+.NXTree img {
+    border-right: 0;
+    border-top: 0;
+    vertical-align: middle;
+    border-left: 0;
+    border-bottom: 0
+}
+
+.NXTree a:hover {
+    font-weight: bold;
+    color: #333;
+    text-decoration: none
+}
+
+.NXTree a {
+    color: #333;
+    text-decoration: none
+}
+
+.NXTreeSelect img {
+    border-right: 0;
+    border-top: 0;
+    vertical-align: middle;
+    border-left: 0;
+    border-bottom: 0
+}
+
+.NXTreeSelect a:hover {
+    font-weight: bold;
+    color: #333;
+    text-decoration: none
+}
+
+.NXTreeSelect a {
+    color: #333;
+    text-decoration: none
+}
+
+.NXTreeNode {
+    white-space: nowrap
+}
+
+.NXNodeSelectText {
+    font-size: 12px;
+    background: #316ac5;
+    margin-left: 3px;
+    cursor: pointer;
+    color: #fff;
+    white-space: nowrap
+}
+
+.NXNodeText {
+    padding-left: 3px;
+    font-size: 12px;
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap
+}
+
+.NXTree {
+    white-space: nowrap
+}
+
+.orgVehicleList {
+    z-index: 100
+}
+
+.orgVehicleList .droptree-container {
+    display: none;
+    background-color: #fff;
+    height: 380px;
+    width: 250px;
+    white-space: normal;
+    overflow: hidden;
+    position: absolute;
+    top: 24px;
+    border: #999 1px solid;
+    padding-top: 0;
+    margin: 0;
+    z-index: 100
+}
+
+.orgVehicleList .droptree {
+    height: 350px;
+    border-bottom: #999 1px solid;
+    overflow: auto
+}
+
+.orgVehicleList .droptreeFrame {
+    display: none;
+    background-color: Transparent;
+    height: 380px;
+    width: 250px;
+    white-space: normal;
+    padding-top: 0;
+    margin: 0;
+    position: absolute;
+    top: 22px;
+    z-index: 99
+}
+
+.orgVehicleList .droptreeInput {
+    border: #999 1px solid;
+    padding-left: 3px;
+    vertical-align: middle;
+    cursor: default;
+    color: #000;
+    width: 248px;
+    line-height: 20px;
+    height: 20px
+}
+
+.orgVehicleList .droptreeimgClass {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    left: 235px;
+    bottom: 3px;
+    margin-top: 0;
+    cursor: pointer
+}
+
+.orgVehicleList .droptree-multiorg {
+    display: none;
+    background-color: #fff;
+    height: 180px;
+    width: 250px;
+    white-space: normal;
+    overflow: hidden;
+    position: absolute;
+    top: 25px;
+    border: #999 1px solid;
+    padding-top: 0;
+    margin: 0;
+    z-index: 100
+}
+
+.orgVehicleList .droptree-multiorg img {
+    background: url(../Images/NG.png) no-repeat;
+    cursor: pointer;
+    margin-bottom: -3px;
+    width: 16px;
+    height: 16px
+}
+
+.orgVehicleList .droptree-multiorg label {
+    margin-left: 10px
+}
+
+.orgVehicleList .droptree-multiorg-title {
+    border-bottom: #999 1px solid;
+    height: 20px;
+    text-align: center;
+    font-weight: bold
+}
+
+.orgVehicleList .droptree-multiorg-tool {
+    border-bottom: #999 1px solid;
+    height: 28px
+}
+
+.btn:link, .btn:active, .btn:visited {
+    text-decoration: none;
+    outline: 0
+}
+
+.btn {
+    text-decoration: none;
+    display: inline-block;
+    *display: inline;
+    padding: 2px 10px;
+    border: 1px solid #ccc;
+    font-size: 12px;
+    line-height: 20px;
+    color: #333;
+    text-align: center;
+    cursor: pointer;
+    background-color: #ebebeb;
+    *zoom: 1
+}
+
+.btn_radius {
+    text-decoration: none;
+    display: inline-block;
+    *display: inline;
+    padding: 2px 10px;
+    border: 1px solid #aac5e7;
+    border-radius: 5px;
+    font-size: 12px;
+    line-height: 17px;
+    color: #333;
+    text-align: center;
+    cursor: pointer;
+    background-color: #f8fcff;
+    *zoom: 1
+}
+
+.btn_nopadding {
+    margin: 0;
+    padding: 0 6px 0 6px;
+    line-height: 17px;
+    *zoom: 1;
+    *overflow: visible
+}
+
+.btn:hover {
+    text-decoration: none;
+    background-color: #f3f7fa;
+    border: 1px solid #c3dffd
+}
+
+.btn_radius:hover {
+    text-decoration: none;
+    background-color: #eff5fb;
+    border: 1px solid #c3dffd
+}
+
+.btn.disabled, .btn[disabled], .btn.disabled:hover {
+    cursor: default;
+    background-color: #e6e6e6;
+    border: 1px solid #ccc
+}
+
+.btn.disabled, .btn[disabled] {
+    opacity: .65;
+    filter: alpha(opacity=65)
+}
+
+.editor-container {
+    width: 95%;
+    margin: 0 auto;
+    border: solid 1px #ccc;
+    margin-top: 5px
+}
+
+.editor-table {
+    width: 100%;
+    border-right: solid 1px #ccc;
+    border-bottom: solid 1px #ccc;
+    border-collapse: collapse
+}
+
+.editor-table td {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-top: solid 1px #ccc;
+    border-left: solid 1px #ccc
+}
+
+.editor-label {
+    width: 96px;
+    text-align: right;
+    padding-right: 5px;
+    background-color: #f8fcff
+}
+
+.editor-field {
+    padding-left: 5px;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: -moz-pre-wrap
+}
+
+.editor-field input[type="image"], .editor-field input[type="password"], .editor-field input[type="number"], .editor-field input[type="tel"], .editor-field input[type="text"], .editor-field textarea {
+    width: 180px
+}
+
+.editor-field select {
+    width: 184px
+}
+
+.editor-required {
+    color: red
+}
+
+.orgVehicleTable td {
+    padding: 0;
+    border: 0
+}
+
+.ep-container {
+    text-align: center;
+    font-size: 14px;
+    line-height: 30px;
+    margin-top: 10px
+}
+
+.ep-container .ep_totalpage {
+    font-weight: bold
+}
+
+.ep-container .ep-btn {
+    background: transparent url(../images/main/btn_bg.png) no-repeat 0 -503px;
+    margin-top: 10px;
+    width: 91px;
+    height: 35px;
+    border: 0;
+    color: #fff;
+    outline: none
+}
+
+.ep-container .epcolumns-btn {
+    background: transparent url(../images/main/btn_bg.png) no-repeat 0 -503px;
+    margin-top: 10px;
+    width: 50px;
+    height: 35px;
+    border: 0;
+    color: #fff;
+    outline: none
+}
+
+.datagrid-cell {
+    cursor: default
+}
+
+.datagrid-cell a {
+    color: #000
+}
+
+.datagrid-mask {
+    opacity: 0 !important;
+    filter: alpha(opacity=0) !important
+}
+
+.editor-field .combo {
+    border: 1px solid #999;
+    -moz-border-radius: 0 0 0 0;
+    -webkit-border-radius: 0 0 0 0;
+    border-radius: 0 0 0 0
+}
+
+.editor-field .combo .textbox .textbox-text {
+    -moz-border-radius: 0 0 0 0;
+    -webkit-border-radius: 0 0 0 0;
+    border-radius: 0 0 0 0
+}
+
+.window-mask {
+    filter: alpha(opacity=0);
+    opacity: 0
+}
+
+.readonlyClass {
+    background-color: #f3f3ef
+}
+
+.ztree li a.curSelectedNode, .ztree li a.curSelectedNode_Edit {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    opacity: 1;
+    height: 17px;
+    padding: 1px 3px 0 0
+}
+
+.ztree li a:hover {
+    text-decoration: none
+}
+
+.ztree li a:hover .node_name {
+    background-color: #b5d7f3;
+    color: #444
+}
+
+.ztree li a.curSelectedNode .node_name, .ztree li a.curSelectedNode_Edit .node_name {
+    background-color: #0092dc;
+    color: #fff
+}
+
+.ztree li a.curSelectedNode .node_name span {
+    color: #fff !important
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: center;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center
+}
+
+.mask div {
+    border: 1px solid #d0d0d0;
+    font-size: 12px;
+    padding: 5px 15px;
+    max-width: 150px;
+    color: #444;
+    background: url('../Images/load.gif') no-repeat 5px 5px;
+    padding-left: 25px;
+    background-color: #fff;
+    word-wrap: break-word
+}
+
+.treeNodeSvrStateText {
+    color: red
+}
+
+.ui-rangeSlider {
+    height: 22px;
+    text-align: left
+}
+
+.ui-rangeSlider .ui-rangeSlider-innerBar {
+    height: 16px;
+    margin: 3px 6px;
+    background: #ddd
+}
+
+.ui-rangeSlider .ui-rangeSlider-handle {
+    width: 6px;
+    height: 22px;
+    background: #aaa;
+    background: rgba(100, 100, 100, .6);
+    cursor: col-resize
+}
+
+.ui-rangeSlider .ui-rangeSlider-bar {
+    margin: 1px 0;
+    background: #ccc;
+    background: rgba(100, 100, 150, .2);
+    height: 20px;
+    cursor: pointer
+}
+
+.ui-rangeSlider .ui-rangeSlider-bar.ui-draggable-dragging {
+    cursor: -moz-grabbing;
+    cursor: grabbing
+}
+
+.ui-rangeSlider-arrow {
+    height: 16px;
+    margin: 2px 0;
+    width: 16px;
+    background-repeat: no-repeat
+}
+
+.ui-rangeSlider-arrow.ui-rangeSlider-leftArrow {
+    background-image: url('../Images/icons/resultset_previous.png');
+    background-position: center left
+}
+
+.ui-rangeSlider-arrow.ui-rangeSlider-rightArrow {
+    background-image: url('../Images/icons/resultset_next.png');
+    background-position: center right
+}
+
+.ui-rangeSlider-arrow-inner {
+    display: none
+}
+
+.ui-rangeSlider-container {
+    height: 22px
+}
+
+.ui-rangeSlider-withArrows .ui-rangeSlider-container {
+    margin: 0 11px
+}
+
+.ui-rangeSlider-noArrow .ui-rangeSlider-container {
+    margin: 0
+}
+
+.ui-rangeSlider-label {
+    margin: 2px 2px 0;
+    background-image: url('../Images/icons/label.png');
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    white-space: nowrap;
+    bottom: -25px;
+    padding: 3px 6px 7px;
+    cursor: col-resize
+}
+
+.ui-rangeSlider-label-inner {
+    display: none
+}
+
+input.ui-editRangeSlider-inputValue {
+    width: 3em;
+    vertical-align: middle;
+    text-align: center
+}

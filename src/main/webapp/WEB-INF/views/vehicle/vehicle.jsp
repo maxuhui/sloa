@@ -7,11 +7,12 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="easyui-layout" fit="true">
-    <div data-options="region:'north',border:false,collapsible:false" style="height: 80px;padding: 10px;overflow: hidden;" title="车辆管理">
+    <div data-options="region:'north',border:false,collapsible:false" style="height: 50px;padding: 10px;overflow: hidden;">
         <form id="vehicle_search_from" class="searcher-form">
-            <input name="account" class="easyui-textbox field" label="车牌号：" labelWidth="65">
-            <input name="userName" class="easyui-textbox field" label="VIN号：" labelWidth="65">
-            <input name="tel" class="easyui-textbox field" label="车主姓名：" labelWidth="75">
+            <input name="carNumber" class="easyui-textbox field" label="车牌号：" labelWidth="65">
+            <input name="carVin" class="easyui-textbox field" label="VIN号：" labelWidth="65">
+            <input name="equitment" class="easyui-textbox field" label="终端ID：" labelWidth="75">
+            <input name="networkNo" class="easyui-textbox field" label="证明号：" labelWidth="75">
             <a class="easyui-linkbutton searcher" data-options="iconCls:'fa fa-search'">检索</a>
             <a class="easyui-linkbutton reset" data-options="iconCls:'fa fa-repeat'">重置</a>
         </form>

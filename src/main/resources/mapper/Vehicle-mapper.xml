@@ -17,11 +17,68 @@
         <result column="carModel" property="carModel"/>
         <result column="carColor" property="carColor"/>
         <result column="carVin" property="carVin"/>
-        <result column="made" property="made"/>
+        <result column="equitment" property="equitment"/>
+        <result column="simNumber" property="simNumber"/>
+        <result column="networkNo" property="networkNo"/>
+        <result column="installtime" property="installTime"/>
+        <result column="Arrears" property="arrears"/>
+        <result column="SVRStartTime" property="svrStartTime"/>
+        <result column="SVREndTime" property="svrEndTime"/>
+        <result column="serviceFee" property="serviceFee"/>
     </resultMap>
-    
+
     <select id="findAll" resultMap="BaseResultMap" parameterType="Vehicle">
-        SELECT  * FROM oa_vehicle
+        SELECT * FROM oa_vehicle
+        <where>
+            <if test="carNumber != null">and carNumber like concat('%', #{carNumber}, '%')</if>
+            <if test="carVin != null">and carVin = #{carVin}</if>
+            <if test="equitment != null">and equitment = #{equitment}</if>
+            <if test="networkNo != null">and networkNo like concat('%', #{networkNo}, '%')</if>
+        </where>
+    </select> 
+    <select id="findOne" resultMap="BaseResultMap" parameterType="string">
+        SELECT * FROM oa_vehicle where id= #{id}
     </select>
-     
+    <select id="queryOne" resultMap="BaseResultMap" parameterType="Vehicle">
+        SELECT * FROM oa_vehicle 
+        <where>
+            <if test="carNumber != null"> carNumber= #{carNumber}</if>
+            <if test="id != null"> id= #{id}</if>
+        </where>
+    </select>
+    
+    <insert id="save" parameterType="Vehicle">
+        insert into oa_vehicle(id,companyName,carOwner,contacts,contactsTel,carNumber,plateColor,issuingUnit,retDate,
+        carType,carBrand,carModel,carColor,carVin,equitment,simNumber,networkNo,installtime,Arrears,SVRStartTime,SVREndTime,serviceFee)
+        values (#{id},#{companyName},#{carOwner},#{contacts},#{contactsTel},#{carNumber},#{plateColor},#{issuingUnit},#{retDate},
+        #{carType},#{carBrand},#{carModel},#{carColor},#{carVin},#{equitment},#{simNumber},#{networkNo},#{installTime},
+        #{arrears},#{svrStartTime},#{svrEndTime},#{serviceFee})
+    </insert>
+    <update id="edit" parameterType="Vehicle">
+        update oa_vehicle set
+        <if test="companyName != null">companyName = #{companyName}</if>
+        <if test="carOwner != null">carOwner = #{carOwner}</if>
+        <if test="contacts != null">contacts = #{contacts}</if>
+        <if test="contactsTel != null">contactsTel = #{contactsTel}</if>
+        <if test="carNumber != null">carNumber = #{carNumber}</if>
+        <if test="plateColor != null">plateColor = #{plateColor}</if>
+        <if test="issuingUnit != null">issuingUnit = #{issuingUnit}</if>
+        <if test="retDate != null">retDate = #{retDate}</if>
+        <if test="carType != null">carType = #{carType}</if>
+        <if test="carBrand != null">carBrand = #{carBrand}</if>
+        <if test="carModel != null">carModel = #{carModel}</if>
+        <if test="carColor != null">carColor = #{carColor}</if>
+        <if test="carVin != null">carVin = #{carVin}</if>
+        <if test="equitment != null">equitment = #{equitment}</if>
+        <if test="networkNo != null">networkNo = #{networkNo}</if>
+        <if test="installtime != null">installtime = #{installtime}</if>
+        <if test="Arrears != null">Arrears = #{arrears}</if>
+        <if test="SVRStartTime != null">SVRStartTime = #{svrStartTime}</if>
+        <if test="svrEndTime != null">svrEndTime = #{svrEndTime}</if>
+        <if test="serviceFee != null">serviceFee = #{serviceFee}</if>
+        where id = #{id}
+    </update>
+    <delete id="deleteById" parameterType="string">
+         delete  from oa_vehicle where id= #{id}
+     </delete>
 </mapper>
