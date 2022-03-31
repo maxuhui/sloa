@@ -14,7 +14,7 @@
     <url>http://www.example.com</url>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <springVersion>4.3.0.RELEASE</springVersion>
+        <springVersion>5.3.18</springVersion>
         <!--<springVersion>5.1.5.RELEASE</springVersion>-->
         <jacksonVersion>2.9.3</jacksonVersion>
         <mybatisVersion>3.4.4</mybatisVersion>
